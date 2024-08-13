@@ -2572,25 +2572,25 @@ namespace ARC
             switch (control)
             {
                 case Button button:
-                    button.Text = Translate.TranslateAppItem(button.Text, languageCode, button.Name);
+                    //button.Text = Translate.TranslateAppItem(button.Text, languageCode, button.Name);
                     break;
                 case CheckBox checkBox:
-                    checkBox.Text = Translate.TranslateAppItem(checkBox.Text, languageCode, checkBox.Name);
+                    //checkBox.Text = Translate.TranslateAppItem(checkBox.Text, languageCode, checkBox.Name);
                     break;
                 case GroupBox group:
-                    group.Text = Translate.TranslateAppItem(group.Text, languageCode, group.Name);
+                    //group.Text = Translate.TranslateAppItem(group.Text, languageCode, group.Name);
                     break;
                 case MetroLabel label2:
-                    label2.Text = Translate.TranslateAppItem(label2.Text, languageCode, label2.Name);
+                    //label2.Text = Translate.TranslateAppItem(label2.Text, languageCode, label2.Name);
                     break;
                 case Label label:
-                    label.Text = Translate.TranslateAppItem(label.Text, languageCode, label.Name);
+                    //label.Text = Translate.TranslateAppItem(label.Text, languageCode, label.Name);
                     break;
                 case Panel panel:
-                    panel.Text = Translate.TranslateAppItem(panel.Text, languageCode, panel.Name);
+                    //panel.Text = Translate.TranslateAppItem(panel.Text, languageCode, panel.Name);
                     break;
                 case TabControl tabcontrol:
-                    tabcontrol.Text = Translate.TranslateAppItem(tabcontrol.Text, languageCode, tabcontrol.Name);
+                    //tabcontrol.Text = Translate.TranslateAppItem(tabcontrol.Text, languageCode, tabcontrol.Name);
                     break;
             }
             foreach (Control child in control.Controls)
@@ -3021,5 +3021,146 @@ namespace ARC
             OpenUnity(StaticValues.Config.Config.UnityLocation2022L, StaticValues.Config.Config.HotSwapName2022L, StaticValues.Config.Config.DocumentLocation);
         }
 
+        private void btnBulkSelect_Click(object sender, EventArgs e)
+        {
+            var folderDlg = new CommonOpenFileDialog { IsFolderPicker = true, InitialDirectory = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) };
+            var result = folderDlg.ShowDialog();
+            if (result == CommonFileDialogResult.Ok)
+            {
+                txtBulk.Text = folderDlg.FileName;
+            }
+        }
+
+        private async void btnBulkGo_Click(object sender, EventArgs e)
+        {
+            string[] files = Directory.GetFiles(txtBulk.Text);
+            foreach (string file in files)
+            {
+                Console.WriteLine(file);
+                string avatarFile = file;
+                AvatarModel avatar = null;
+                bool worldFile = false;
+                if (vrcaLocation.EndsWith(".vrcw"))
+                {
+                    worldFile = true;
+                }
+                string questFile = avatarFile.Replace("_pc", "_quest");
+                if (File.Exists(avatarFile) && File.Exists(questFile) && avatarFile != questFile)
+                {
+                    var dlgResult = MessageBox.Show("Select which version to extract", "VRCA Select",
+                       MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+
+                    if (dlgResult == DialogResult.No)
+                    {
+                        avatarFile = avatarFile.Replace("_pc", "_quest");
+                    }
+                }
+                else
+                {
+                    if (!File.Exists(avatarFile))
+                    {
+                        if (File.Exists(avatarFile.Replace("_pc", "_quest")))
+                        {
+                            avatarFile = avatarFile.Replace("_pc", "_quest");
+                        }
+                        else
+                        {
+                            MessageBox.Show("Something went wrong with avatar file location, either it failed to download or the file doesn't exist");
+                            return;
+                        }
+                    }
+                }
+
+                var filePath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+                var invalidFileNameChars = Path.GetInvalidFileNameChars();
+                string folderExtractLocation;
+                if (avatarFile.EndsWith(".vrcw"))
+                {
+                    folderExtractLocation = txtWorldOutput.Text + @"\" + Path.GetFileNameWithoutExtension(avatarFile);
+                }
+                else
+                {
+                    folderExtractLocation = txtAvatarOutput.Text + @"\" + Path.GetFileNameWithoutExtension(avatarFile);
+                }
+                if (!Directory.Exists(folderExtractLocation)) Directory.CreateDirectory(folderExtractLocation);
+                var commands =
+                    string.Format(
+                        "/C AssetRipper.exe \"{1}\" -o \"{0}\"",
+                            folderExtractLocation, avatarFile);
+
+                var p = new Process();
+                var psi = new ProcessStartInfo
+                {
+                    FileName = "CMD.EXE",
+                    Arguments = commands,
+                    WorkingDirectory = StaticValues.AssetRipper
+                };
+                p.StartInfo = psi;
+                p.Start();
+                p.WaitForExit();
+                RandomFunctions.tryDeleteDirectory(folderExtractLocation + @"\AssetRipper\GameAssemblies");
+                try
+                {
+                    Directory.Move(folderExtractLocation + @"\Assets\Shader",
+                        folderExtractLocation + @"\Assets\.Shader");
+                }
+                catch { }
+                try
+                {
+                    Directory.Move(folderExtractLocation + @"\Assets\Scripts",
+                        folderExtractLocation + @"\Assets\.Scripts");
+                }
+                catch { }
+                RandomFunctions.tryDeleteDirectory(folderExtractLocation + @"\AuxiliaryFiles");
+                RandomFunctions.tryDeleteDirectory(folderExtractLocation + @"\ExportedProject\AssetRipper");
+                RandomFunctions.tryDeleteDirectory(folderExtractLocation + @"\ExportedProject\ProjectSettings");
+                try
+                {
+                    Directory.Move(folderExtractLocation + @"\ExportedProject\Assets\Shader",
+                        folderExtractLocation + @"\ExportedProject\Assets\.Shader");
+                    Directory.Move(folderExtractLocation + @"\ExportedProject\Assets\Scripts",
+                        folderExtractLocation + @"\ExportedProject\Assets\.Scripts");
+                    Directory.Move(folderExtractLocation + @"\ExportedProject\Assets\MonoScript",
+                        folderExtractLocation + @"\ExportedProject\Assets\.MonoScript");
+                }
+                catch { }
+                FixVRC3Scripts fixVRC3Scripts = new FixVRC3Scripts();
+                string message = fixVRC3Scripts.FixScripts(folderExtractLocation);
+                if (chkReassignShaders.Checked)
+                {
+                    FixVRCMaterials fixVRCMaterials = new FixVRCMaterials();
+                    message = message + Environment.NewLine + fixVRCMaterials.FixMaterials(folderExtractLocation);
+                }
+
+                if (chkUnityPackage.Checked)
+                {
+                    RandomFunctions.tryDeleteDirectory(folderExtractLocation + @"\ExportedProject\.Scripts");
+                    RandomFunctions.tryDeleteDirectory(folderExtractLocation + @"\ExportedProject\.Shader");
+                    var inpath = folderExtractLocation + @"\ExportedProject\Assets";
+                    var extensions = new List<string>()
+                        {
+                            "meta"
+                        };
+
+                    var skipFolders = new List<string>()
+                        {
+                            ".Scripts",
+                            ".Shader"
+                        };
+
+                    try
+                    {
+
+                        var pack = Package.FromDirectory(inpath, Path.GetFileNameWithoutExtension(avatarFile), true, extensions.ToArray(), skipFolders.ToArray());
+                        pack.GeneratePackage(saveLocation: folderExtractLocation.Replace(Path.GetFileNameWithoutExtension(avatarFile), ""));
+                        RandomFunctions.tryDeleteDirectory(folderExtractLocation);
+                    }
+                    catch (Exception ex) { MessageBox.Show("Failed to generate unity package\n" + ex.Message); }
+
+                }
+
+            }
+        
+        }
     }
 }

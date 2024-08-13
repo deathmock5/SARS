@@ -45,7 +45,16 @@
     <TranslationReport Condition="'$(Configuration)' == 'Release'">true</TranslationReport>
     <SuppressPseudoWarning Condition="'$(Configuration)' == 'Debug'">true</SuppressPseudoWarning>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>ARC.Program</StartupObject>
+  </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AssetsTools.NET">
+      <HintPath>..\AssetsTools.NET.dll</HintPath>
+    </Reference>
+    <Reference Include="CoreSystem">
+      <HintPath>..\CoreSystem.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
@@ -269,14 +278,6 @@
     <Folder Include="NewestViewer\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\..\Code\AssetsTools.NET-upd21-with-inst\AssetsTools.NET-upd21-with-inst\AssetTools.NET\AssetsTools.NET.csproj">
-      <Project>{3d623ba7-2a18-4808-8612-ae67b087ada7}</Project>
-      <Name>AssetsTools.NET</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\CoreSystem\CoreSystem.csproj">
-      <Project>{29a02b50-5725-4fd0-a280-3377fcfbf397}</Project>
-      <Name>CoreSystem</Name>
-    </ProjectReference>
     <ProjectReference Include="..\VRChatAPI-New\VRChatAPI-New.csproj">
       <Project>{cedc4c2d-e846-4c34-99ad-7642853744f7}</Project>
       <Name>VRChatAPI-New</Name>

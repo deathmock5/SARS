@@ -171,6 +171,10 @@
             this.Column1 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.Column2 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.metroTabPage8 = new MetroFramework.Controls.MetroTabPage();
+            this.btnBulkGo = new MetroFramework.Controls.MetroButton();
+            this.txtBulk = new MetroFramework.Controls.MetroTextBox();
+            this.btnBulkSelect = new MetroFramework.Controls.MetroButton();
+            this.metroLabel20 = new MetroFramework.Controls.MetroLabel();
             this.lblUnityVersion = new MetroFramework.Controls.MetroLabel();
             this.metroLabel15 = new MetroFramework.Controls.MetroLabel();
             this.metroLabel11 = new MetroFramework.Controls.MetroLabel();
@@ -1134,16 +1138,16 @@
             // 
             // 
             // 
-            this.txtWorldOutput.CustomButton.Image = ((System.Drawing.Image)(resources.GetObject("resource.Image10")));
-            this.txtWorldOutput.CustomButton.ImeMode = ((System.Windows.Forms.ImeMode)(resources.GetObject("resource.ImeMode10")));
-            this.txtWorldOutput.CustomButton.Location = ((System.Drawing.Point)(resources.GetObject("resource.Location10")));
+            this.txtWorldOutput.CustomButton.Image = ((System.Drawing.Image)(resources.GetObject("resource.Image11")));
+            this.txtWorldOutput.CustomButton.ImeMode = ((System.Windows.Forms.ImeMode)(resources.GetObject("resource.ImeMode11")));
+            this.txtWorldOutput.CustomButton.Location = ((System.Drawing.Point)(resources.GetObject("resource.Location11")));
             this.txtWorldOutput.CustomButton.Name = "";
-            this.txtWorldOutput.CustomButton.Size = ((System.Drawing.Size)(resources.GetObject("resource.Size10")));
+            this.txtWorldOutput.CustomButton.Size = ((System.Drawing.Size)(resources.GetObject("resource.Size11")));
             this.txtWorldOutput.CustomButton.Style = MetroFramework.MetroColorStyle.Green;
-            this.txtWorldOutput.CustomButton.TabIndex = ((int)(resources.GetObject("resource.TabIndex10")));
+            this.txtWorldOutput.CustomButton.TabIndex = ((int)(resources.GetObject("resource.TabIndex11")));
             this.txtWorldOutput.CustomButton.Theme = MetroFramework.MetroThemeStyle.Dark;
             this.txtWorldOutput.CustomButton.UseSelectable = true;
-            this.txtWorldOutput.CustomButton.Visible = ((bool)(resources.GetObject("resource.Visible10")));
+            this.txtWorldOutput.CustomButton.Visible = ((bool)(resources.GetObject("resource.Visible11")));
             this.txtWorldOutput.FontSize = MetroFramework.MetroTextBoxSize.Tall;
             this.txtWorldOutput.FontWeight = MetroFramework.MetroTextBoxWeight.Bold;
             this.txtWorldOutput.Lines = new string[0];
@@ -1192,16 +1196,16 @@
             // 
             // 
             // 
-            this.txtAvatarOutput.CustomButton.Image = ((System.Drawing.Image)(resources.GetObject("resource.Image9")));
-            this.txtAvatarOutput.CustomButton.ImeMode = ((System.Windows.Forms.ImeMode)(resources.GetObject("resource.ImeMode9")));
-            this.txtAvatarOutput.CustomButton.Location = ((System.Drawing.Point)(resources.GetObject("resource.Location9")));
+            this.txtAvatarOutput.CustomButton.Image = ((System.Drawing.Image)(resources.GetObject("resource.Image10")));
+            this.txtAvatarOutput.CustomButton.ImeMode = ((System.Windows.Forms.ImeMode)(resources.GetObject("resource.ImeMode10")));
+            this.txtAvatarOutput.CustomButton.Location = ((System.Drawing.Point)(resources.GetObject("resource.Location10")));
             this.txtAvatarOutput.CustomButton.Name = "";
-            this.txtAvatarOutput.CustomButton.Size = ((System.Drawing.Size)(resources.GetObject("resource.Size9")));
+            this.txtAvatarOutput.CustomButton.Size = ((System.Drawing.Size)(resources.GetObject("resource.Size10")));
             this.txtAvatarOutput.CustomButton.Style = MetroFramework.MetroColorStyle.Green;
-            this.txtAvatarOutput.CustomButton.TabIndex = ((int)(resources.GetObject("resource.TabIndex9")));
+            this.txtAvatarOutput.CustomButton.TabIndex = ((int)(resources.GetObject("resource.TabIndex10")));
             this.txtAvatarOutput.CustomButton.Theme = MetroFramework.MetroThemeStyle.Dark;
             this.txtAvatarOutput.CustomButton.UseSelectable = true;
-            this.txtAvatarOutput.CustomButton.Visible = ((bool)(resources.GetObject("resource.Visible9")));
+            this.txtAvatarOutput.CustomButton.Visible = ((bool)(resources.GetObject("resource.Visible10")));
             this.txtAvatarOutput.FontSize = MetroFramework.MetroTextBoxSize.Tall;
             this.txtAvatarOutput.FontWeight = MetroFramework.MetroTextBoxWeight.Bold;
             this.txtAvatarOutput.Lines = new string[0];
@@ -1630,7 +1634,7 @@
             this.tabControl.Controls.Add(this.metroTabPage8);
             this.tabControl.FontWeight = MetroFramework.MetroTabControlWeight.Bold;
             this.tabControl.Name = "tabControl";
-            this.tabControl.SelectedIndex = 5;
+            this.tabControl.SelectedIndex = 7;
             this.tabControl.UseSelectable = true;
             this.tabControl.SelectedIndexChanged += new System.EventHandler(this.tabControl_SelectedIndexChanged);
             // 
@@ -1764,6 +1768,10 @@
             // 
             // metroTabPage8
             // 
+            this.metroTabPage8.Controls.Add(this.btnBulkGo);
+            this.metroTabPage8.Controls.Add(this.txtBulk);
+            this.metroTabPage8.Controls.Add(this.btnBulkSelect);
+            this.metroTabPage8.Controls.Add(this.metroLabel20);
             this.metroTabPage8.Controls.Add(this.btnOpen2022L);
             this.metroTabPage8.Controls.Add(this.btnOpen2019);
             this.metroTabPage8.Controls.Add(this.btnUnityLocation2022L);
@@ -1798,6 +1806,65 @@
             this.metroTabPage8.VerticalScrollbarBarColor = true;
             this.metroTabPage8.VerticalScrollbarHighlightOnWheel = false;
             this.metroTabPage8.VerticalScrollbarSize = 10;
+            // 
+            // btnBulkGo
+            // 
+            resources.ApplyResources(this.btnBulkGo, "btnBulkGo");
+            this.btnBulkGo.FontSize = MetroFramework.MetroButtonSize.Tall;
+            this.btnBulkGo.Name = "btnBulkGo";
+            this.btnBulkGo.UseSelectable = true;
+            this.btnBulkGo.UseStyleColors = true;
+            this.btnBulkGo.Click += new System.EventHandler(this.btnBulkGo_Click);
+            // 
+            // txtBulk
+            // 
+            resources.ApplyResources(this.txtBulk, "txtBulk");
+            // 
+            // 
+            // 
+            this.txtBulk.CustomButton.Image = ((System.Drawing.Image)(resources.GetObject("resource.Image9")));
+            this.txtBulk.CustomButton.ImeMode = ((System.Windows.Forms.ImeMode)(resources.GetObject("resource.ImeMode9")));
+            this.txtBulk.CustomButton.Location = ((System.Drawing.Point)(resources.GetObject("resource.Location9")));
+            this.txtBulk.CustomButton.Name = "";
+            this.txtBulk.CustomButton.Size = ((System.Drawing.Size)(resources.GetObject("resource.Size9")));
+            this.txtBulk.CustomButton.Style = MetroFramework.MetroColorStyle.Green;
+            this.txtBulk.CustomButton.TabIndex = ((int)(resources.GetObject("resource.TabIndex9")));
+            this.txtBulk.CustomButton.Theme = MetroFramework.MetroThemeStyle.Dark;
+            this.txtBulk.CustomButton.UseSelectable = true;
+            this.txtBulk.CustomButton.Visible = ((bool)(resources.GetObject("resource.Visible9")));
+            this.txtBulk.FontSize = MetroFramework.MetroTextBoxSize.Tall;
+            this.txtBulk.FontWeight = MetroFramework.MetroTextBoxWeight.Bold;
+            this.txtBulk.Lines = new string[0];
+            this.txtBulk.MaxLength = 32767;
+            this.txtBulk.Name = "txtBulk";
+            this.txtBulk.PasswordChar = '\0';
+            this.txtBulk.ReadOnly = true;
+            this.txtBulk.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.txtBulk.SelectedText = "";
+            this.txtBulk.SelectionLength = 0;
+            this.txtBulk.SelectionStart = 0;
+            this.txtBulk.ShortcutsEnabled = true;
+            this.txtBulk.UseSelectable = true;
+            this.txtBulk.UseStyleColors = true;
+            this.txtBulk.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
+            this.txtBulk.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
+            // 
+            // btnBulkSelect
+            // 
+            resources.ApplyResources(this.btnBulkSelect, "btnBulkSelect");
+            this.btnBulkSelect.FontSize = MetroFramework.MetroButtonSize.Tall;
+            this.btnBulkSelect.Name = "btnBulkSelect";
+            this.btnBulkSelect.UseSelectable = true;
+            this.btnBulkSelect.UseStyleColors = true;
+            this.btnBulkSelect.Click += new System.EventHandler(this.btnBulkSelect_Click);
+            // 
+            // metroLabel20
+            // 
+            resources.ApplyResources(this.metroLabel20, "metroLabel20");
+            this.metroLabel20.FontSize = MetroFramework.MetroLabelSize.Tall;
+            this.metroLabel20.FontWeight = MetroFramework.MetroLabelWeight.Bold;
+            this.metroLabel20.Name = "metroLabel20";
+            this.metroLabel20.UseStyleColors = true;
             // 
             // lblUnityVersion
             // 
@@ -2121,6 +2188,10 @@
         private MetroFramework.Controls.MetroButton btnOpen2022L;
         private MetroFramework.Controls.MetroButton btnOpen2019;
         public MetroFramework.Controls.MetroButton metroButton1;
+        private MetroFramework.Controls.MetroButton btnBulkGo;
+        private MetroFramework.Controls.MetroTextBox txtBulk;
+        private MetroFramework.Controls.MetroButton btnBulkSelect;
+        private MetroFramework.Controls.MetroLabel metroLabel20;
     }
 }
 
